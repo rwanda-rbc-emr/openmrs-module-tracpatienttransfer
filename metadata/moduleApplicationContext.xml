@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- Beans to add to the current Application context definition -->
+  
+<beans>
+	
+    <bean id="tracpatienttransferUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    	<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor" />
+			</list>
+		</property>
+    	<property name="order"><value>2</value></property>
+    	<property name="mappings">
+            <props>
+            	<!-- <prop key="**/patientExitPortlet.portlet">patientExitHistoryPortletController</prop> -->
+	           <prop key="module/@MODULE_ID@/exitPatientFromCare.form">tracpatienttransferFormController</prop>
+	           <prop key="module/@MODULE_ID@/patientExitedFromCare.list">tracpatientExitedFromCareListController</prop>
+	           <prop key="module/@MODULE_ID@/overview.form">myNewController</prop>
+	           <prop key="module/@MODULE_ID@/resumeCare.form">resumeCareController</prop>
+	           <prop key="module/@MODULE_ID@/advancedSearch.form">patientExitedFromCareAdvancedSearchFormController</prop>
+	           <prop key="module/@MODULE_ID@/patientsResumedCare.list">patientExitedFromCarePatientResumedCareController</prop>
+	           <prop key="module/@MODULE_ID@/chart.htm">chartController</prop>
+	        </props>
+		</property>
+    </bean>
+	
+    <!-- Controllers -->
+	
+	<bean id="overviewChartController" class="@MODULE_PACKAGE@.web.view.chart.OverviewOnExitPieChartView" />
+	<bean id="reasonPatientExitCareChartController" class="@MODULE_PACKAGE@.web.view.chart.ReasonPatientExitCareChartView" />
+	<bean id="evolutionRPECXYChartController" class="@MODULE_PACKAGE@.web.view.chart.EvolutionOfPEFCareByReasonOfExitChartView" />
+	<bean id="proportionOfPatientExitingCareChartController" class="@MODULE_PACKAGE@.web.view.chart.ProportionOfPatientResumingCareByReasonChartView" />
+	
+	<bean id="chartController" class="@MODULE_PACKAGE@.web.controller.ChartStatsQueryController">
+		<property name="chartViews">
+			<map>
+				<entry key="patientExited"><ref bean="overviewChartController" /></entry>
+				<entry key="reasonOfExit"><ref bean="reasonPatientExitCareChartController" /></entry>
+				<entry key="evolutionOfReasonOfExit"><ref bean="evolutionRPECXYChartController" /></entry>
+				<entry key="proportionOfPEC"><ref bean="proportionOfPatientExitingCareChartController" /></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- <bean id="patientExitHistoryPortletController" class="@MODULE_PACKAGE@.web.controller.EPFC_PatientExitHistoryPortletController" /> -->
+	
+    <bean id="patientExitedFromCarePatientResumedCareController" class="@MODULE_PACKAGE@.web.controller.EPFC_PatientsResumedCareController">
+		<property name="viewName"><value>/module/@MODULE_ID@/patientsResumedCareList</value></property>
+    </bean>
+	
+    <bean id="patientExitedFromCareAdvancedSearchFormController" class="@MODULE_PACKAGE@.web.controller.AdvancedSearchFormController">
+		<property name="viewName"><value>/module/@MODULE_ID@/advancedSearch</value></property>
+    </bean>
+	
+    <bean id="resumeCareController" class="@MODULE_PACKAGE@.web.controller.EPFC_ResumeCareFormController">
+		<property name="viewName"><value>/module/@MODULE_ID@/resumeCareForm</value></property>
+    </bean>
+	
+    <bean id="tracpatienttransferFormController" class="@MODULE_PACKAGE@.web.controller.PatientExitFromCareFormController">
+		<property name="viewName"><value>/module/@MODULE_ID@/exitPatientFromCareForm</value></property>
+    </bean>
+	
+    <bean id="tracpatientExitedFromCareListController" class="@MODULE_PACKAGE@.web.controller.ExitPatientFromCareListController">
+		<property name="viewName"><value>/module/@MODULE_ID@/patientExitedFromCareList</value></property>
+    </bean>
+	
+    <bean id="myNewController" class="@MODULE_PACKAGE@.web.controller.EPFC_OverviewController">
+		<property name="viewName"><value>/module/@MODULE_ID@/overview</value></property>
+    </bean>
+	
+    <!-- /Controllers -->
+    
+    <bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.tracpatienttransfer.service.PatientTransferService</value>
+				<bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+					<property name="transactionManager">
+						<ref bean="transactionManager" />
+					</property>
+					<property name="target">
+						<bean class="org.openmrs.module.tracpatienttransfer.impl.PatientTransferServiceImpl">
+							<property name="patientExitDao">
+								<bean class="org.openmrs.module.tracpatienttransfer.db.hibernate.PatientTransferDAOImpl">
+									<property name="sessionFactory">
+										<ref bean="sessionFactory" />
+									</property>
+								</bean>
+							</property>
+						</bean>
+					</property>
+					<property name="preInterceptors">
+						<list>
+							<ref bean="authorizationInterceptor" />
+						</list>
+					</property>
+					<property name="transactionAttributeSource">
+						<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource" />
+					</property>
+				</bean>
+			</list>
+		</property>
+		
+	</bean>
+	
+    <!-- ========================= other beans ========================= -->
+    
+    <bean class="@MODULE_PACKAGE@.util.ContextProvider" />
+</beans>
