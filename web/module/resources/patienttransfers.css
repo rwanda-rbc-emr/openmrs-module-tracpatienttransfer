@@ -1,0 +1,91 @@
+.numberCol{
+	text-align: left;
+}
+
+.sampleCodeCol{
+	text-align: left;
+}
+
+.locationCol{
+	text-align: left;
+}
+
+.personNameCol{
+	text-align: left;
+}
+
+.testCol{
+	text-align: left;
+}
+
+.testDateCol{
+	text-align: left;
+}
+
+.resultCol{
+	text-align: left;
+}
+
+.commentCol{
+	text-align: left;
+}
+
+.menuTab,.menuLink{	
+	width: 100%;
+	cursor: pointer;
+}
+
+.menuTab{
+	font-weight: bold;
+	text-align: center;
+}
+
+.menuLink:hover{
+	background-color: #efefef;
+}
+
+.menuTab:hover, .menuTabCurrent, .resumedExit{
+	background-color: #dddddd;
+}
+
+.detail:hover{
+	background-color: #F0E68C;
+}
+
+#savedDiv{
+	font-family: monospace;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #8FABC7;
+	color: #FFFFFF;
+	text-align: center;
+	width: 35%;
+	cursor: pointer;
+	margin: 10px auto 10px auto;
+	padding: 8px;
+	-moz-border-radius: 4px;
+	border-right: 2px solid #dddddd;
+	border-bottom: 2px solid #dddddd;
+}
+
+#savedDiv:hover{
+	border-left: 2px solid #dddddd;
+	border-top: 2px solid #dddddd;
+	border-right: none;
+	border-bottom: none;
+}
+
+input[readonly=readonly],input[readonly=readonly]:focus{
+	background-color: #ebebeb;
+}
+
+/* .list_exportBt {
+	cursor: pointer;
+	padding: 2px;
+	font-size: 9px;
+	color: #dddddd;
+	border: 1px solid #FFFFFF;
+	margin-left: 3px;
+	-moz-border-radius: 4px;
+	font-weight: bold;
+} */

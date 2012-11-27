@@ -1,0 +1,153 @@
+.list_container{
+	width: 99%;
+	display: block;
+	font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	line-height: 1.45em;
+	font-size: 0.8em;
+	margin: auto auto auto auto;
+}
+
+.list_title {
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-topleft: 4px;
+	border: 1px solid #AAAAAA;
+	font-weight: bold;
+	color: #ffffff;
+	background: #8FABC7;
+	padding: 5px;
+	margin: 0;
+	min-width: 98%;
+}
+
+.list_data, .chartHolder {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.chartHolder{
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border-left: 1px solid #E6E6E6;
+	border-right: 2px solid #E6E6E6;
+	border-bottom: 2px solid #E6E6E6;
+	padding: 5px;
+	min-width: 98%;
+}
+
+.columnHeader {
+	cursor: pointer;
+	padding: 3px 0 3px 10px;
+	background: #E6E6E6;
+	border: 1px solid #D3D3D3;
+	color: #555555;
+	text-align: left;
+	font-size: 0.8em;
+	margin: 0;
+	font-weight: normal;
+}
+
+.row{
+	cursor: pointer;
+}
+
+.row:hover{
+	background-color: #F0E68C;
+}
+
+.rowValue {
+	font-size: 0.95em;
+	margin: 0;
+	font-weight: normal;
+	padding-left: 10px;
+}
+
+.even {
+	background-color: whitesmoke;
+	border-bottom: 1px solid cadetblue;
+	border-top: 1px solid cadetblue;
+}
+
+.legend{
+	font-size: 0.6em;
+}
+
+.legend span{
+	font-weight: bold;
+	color: #8FABC7;
+}
+
+#list_footer {
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border: 1px solid #AAAAAA;
+	font-weight: bold;
+	color: #ffffff;
+	background: #8FABC7;
+	padding: 5px;
+	margin: 0px;
+	min-width: 98%;
+}
+
+.list_footer_info {
+	float: left;
+	padding-top: 0;
+	width: 25%;
+}
+
+.list_footer_pages {
+	float: right;
+	text-align: right;
+	padding-top: 0;
+	margin-right: 3px;
+	max-width: 70%;
+	display: inline;
+}
+
+.list_pageNumber {
+	cursor: pointer;
+	padding: 2px 4px;
+	border: 1px solid #D3D6FF;
+	-moz-border-radius: 4px;
+	background: #8FABC7;
+	color: #000000;
+	font-size: 9px;
+	font-weight: normal;
+	text-align: right;
+}
+
+.list_pageNumber:hover {
+	opacity: 0.8;
+	color: #FFFFFF;
+}
+
+.list_pageNumberCurrent {
+	cursor: pointer;
+	padding: 2px 4px;
+	border: 1px solid #D3D6FF;
+	-moz-border-radius: 4px;
+	background: #ffffff;
+	color: #000000;
+	font-size: 9px;
+	font-weight: normal;
+	text-align: right;
+}
+
+.list_title_msg{
+	float: left;
+	width: 40%;
+}
+
+.list_title_bts{
+	float: right;
+	width: 60%;
+	text-align: right;
+	font-size:12px;
+}
+
+#period {
+	border: 1px solid white; 
+	-moz-border-radius: 2px; 
+	padding: 4px;
+}

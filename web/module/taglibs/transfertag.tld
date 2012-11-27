@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>MoH-TRAC Transfer tag library</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>transfertag</short-name>
+	<uri>http://openmrs.org/module/tracpatienttransfer</uri>
+	
+	<function>
+		<name>personIdentifierByIds</name>
+		<function-class>org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientTag</function-class>
+		<function-signature>java.lang.String personIdentifierByPatientIdAndIdentifierTypeId(java.lang.Integer,java.lang.Integer)</function-signature>
+	</function>
+	
+	<function>
+		<name>conceptName</name>
+		<function-class>org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientTag</function-class>
+		<function-signature>java.lang.String getConceptNameById(java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>numberOfPatientExitedFromCareByReason</name>
+		<function-class>org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientTag</function-class>
+		<function-signature>java.lang.String getNumberOfPatientExitedFromCareWithReason(java.lang.Integer)</function-signature>
+	</function>
+	
+	<function>
+		<name>numberOfPatientExitedFromCare</name>
+		<function-class>org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientTag</function-class>
+		<function-signature>java.lang.String getNumberOfPatientExitedFromCare()</function-signature>
+	</function>
+	
+	<function>
+		<name>identifierTypeNameById</name>
+		<function-class>org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientTag</function-class>
+		<function-signature>java.lang.String getIdentifierTypeNameById(java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>obsValueFromEncounterByConceptId</name>
+		<function-class>org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientTag</function-class>
+		<function-signature>java.lang.String getObservationValueFromEncounter(org.openmrs.Obs,java.lang.Integer)</function-signature>
+	</function>
+	
+</taglib>
