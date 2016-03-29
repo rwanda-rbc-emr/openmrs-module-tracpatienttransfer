@@ -3,10 +3,10 @@
 <module configVersion="1.2">
 	
 	<!-- Base Module Properties -->
-	<id>tracpatienttransfer</id>
-	<name>MOH-TRAC Patient exits from care</name>
-	<version>0.3.3.33</version>
-	<package>org.openmrs.module.@MODULE_ID@</package>
+	<id>@MODULE_ID@</id>
+	<name>@MODULE_NAME@</name>
+	<version>@MODULE_VERSION@</version>
+	<package>@MODULE_PACKAGE@</package>
 	<author>Yves GAKUBA</author>
 	<description>
 			Management of exits of patients from care
@@ -21,7 +21,7 @@
 	<!-- <updateURL>https://dev.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
 	<!-- /Base Module Properties -->
 	
-	<require_version>1.6.2.12911</require_version>
+	<require_version>${openMRSVersion}</require_version>
 	
 	<!-- Extensions -->
 	<extension>
