@@ -18,6 +18,7 @@ import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
 import org.openmrs.Person;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mohtracportal.service.MohTracPortalService;
 import org.openmrs.module.mohtracportal.util.MohTracUtil;
 import org.openmrs.module.tracpatienttransfer.service.PatientTransferService;
 import org.openmrs.module.tracpatienttransfer.util.TracPatientTransferConfigurationUtil;
@@ -173,29 +174,26 @@ public class EPFC_ResumeCareFormController extends
 				}
 
 				// restart drugs
-				List<DrugOrder> dOrderList = Context.getOrderService()
-						.getDrugOrdersByPatient(lastObs.getPatient());
+				List<DrugOrder> dOrderList = Context.getService(MohTracPortalService.class).getDrugOrdersByPatient(lastObs.getPatient());
 				for (DrugOrder dOrder : dOrderList) {
 					log.info(">>>>>>>DrugOrder......."
 							+ dOrder.isDiscontinuedRightNow()
 							+ ".........DO="
-							+ dOrder.getDiscontinuedDate()
+							+ dOrder.getEffectiveStopDate()
 							+ "...."
-							+ (dOrder.getDiscontinuedDate() == lastObs
+							+ (dOrder.getEffectiveStopDate() == lastObs
 									.getObsDatetime()) + "...Obs="
 							+ lastObs.getObsDatetime() + "----------" + dOrder);
 					DrugOrder dOrderToRestart = null;
 					if (dOrder.isDiscontinuedRightNow()
-							&& dOrder.getDiscontinuedDate().compareTo(
+							&& dOrder.getEffectiveStopDate().compareTo(
 									lastObs.getObsDatetime()) == 0) {
 						dOrderToRestart = dOrder;
-						dOrderToRestart.setDiscontinued(false);
-						dOrderToRestart.setDiscontinuedBy(null);
-						dOrderToRestart.setDiscontinuedDate(null);
+						//TODO Continue this ORder
 						log
 								.info(">>>>>>>PatientProgram.....Trying to update DrugOrder...."
 										+ dOrderToRestart);
-						Context.getOrderService().updateOrder(dOrderToRestart);
+						Context.getOrderService().saveOrder(dOrderToRestart, null);
 						log.info(">>>>>>>PatientProgram.....UPDATED !");
 					}
 				}

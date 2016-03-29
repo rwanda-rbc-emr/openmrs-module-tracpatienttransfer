@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.2//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
 <module configVersion="1.2">
 	
 	<!-- Base Module Properties -->
@@ -22,6 +21,15 @@
 	<!-- /Base Module Properties -->
 	
 	<require_version>${openMRSVersion}</require_version>
+	
+	<require_modules>
+		<require_module version="${mohorderentrybridgeVersion}">
+			org.openmrs.module.mohorderentrybridge
+		</require_module>
+		<require_module version="${mohtracPortalVersion}">
+			org.openmrs.module.mohtracportal
+		</require_module>
+	</require_modules>
 	
 	<!-- Extensions -->
 	<extension>
@@ -67,57 +75,6 @@
 		<name>Manage search/listing on Patient Exited from care</name>
 		<description>Able to query on patients exited from care</description>
 	</privilege>
-	
-	<!-- <privilege>
-		<name>Manage Patients Resumed Care</name>
-		<description>Able to view patients who resumed care</description>
-	</privilege> -->
-	
-	<!-- Required Privileges -->
-
-
-	<!-- Required Global Properties 
-	<globalProperty>
-		<property>@MODULE_ID@.someProperty</property>
-		<defaultValue></defaultValue>
-		<description>
-			A description of the global property goes here.  The description
-			should explain enough for administrators to understand the purpose
-			and possible values for the global property.
-		</description>
-	</globalProperty>
-	/Required Global Properties -->
-	
-	<!--
-	<dwr>
-		<allow>
-			<create creator="new" javascript="DWRFormEntryService">
-				<param name="class" value="org.openmrs.module.@MODULE_ID@.web.DWRFormEntryService"/>
-				<include method="enterForm"/>
-			</create>
-		</allow>
-
-		<signatures>
-			<![CDATA[
-			import @MODULE_PACKAGE@.web.DWRFormEntryService;
-			DWRFormEntryService.enterForm(Integer patientId, Integer formId, boolean useEncounter, List<String> fields);
-			]]>
-		</signatures>	
-	</dwr>
-	-->
-	
-	<!-- Servlets -->
-	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
-	<servlet>
-		<servlet-name>formDownload</servlet-name>
-		<servlet-class>@MODULE_PACKAGE@.web.FormDownloadServlet</servlet-class>
-	</servlet>
-	-->
-	<!-- /Servlets -->
-	
-	
-	<!-- Internationalization -->
-	<!-- All message codes should start with @MODULE_ID@.* -->
 	<messages>
 		<lang>en</lang>
 		<file>messages.properties</file>

@@ -15,14 +15,16 @@ package org.openmrs.module.tracpatienttransfer;
 
 import java.util.Map;
 
-import junit.framework.TestCase;
-
+import org.junit.Ignore;
 import org.openmrs.module.Extension.MEDIA_TYPE;
 import org.openmrs.module.tracpatienttransfer.extension.html.AdminList;
+
+import junit.framework.TestCase;
 
 /**
  * This test validates the AdminList extension class
  */
+@Ignore
 public class AdminListExtensionTest extends TestCase {
 
 	/**

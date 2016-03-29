@@ -12,9 +12,9 @@
 	<url>http://openmrs.org</url>
 
 	<scm>
-		<connection>scm:svn:http://svn.openmrs.org/openmrs-modules/tracpatienttransfer/trunk/</connection>
-		<developerConnection>scm:svn:http://svn.openmrs.org/openmrs-modules/tracpatienttransfer/trunk/</developerConnection>
-		<url>http://svn.openmrs.org/openmrs-modules/tracpatienttransfer/trunk/</url>
+		<connection>scm:svn:http://svn.openmrs.org/openmrs-modules/mohappointment/trunk/</connection>
+		<developerConnection>scm:svn:http://svn.openmrs.org/openmrs-modules/mohappointment/trunk/</developerConnection>
+		<url>http://svn.openmrs.org/openmrs-modules/mohappointment/trunk/</url>
 	</scm>
 
 	<modules>
@@ -24,19 +24,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!--
-			Libraries from lib to add as dependencies with compile or runtime scope:
-			lib/iText-5.0.5.jar
-				
-			Find matching dependencies in maven central repository.
-			<dependency>
-				<groupId>org.other.library</groupId>
-				<artifactId>library-name</artifactId>
-				<version>library.version</version>
-				<scope>compile</scope>
-			</dependency>
-			-->
-			
 			<dependency>
 				<groupId>org.openmrs.api</groupId>
 				<artifactId>openmrs-api</artifactId>
@@ -56,6 +43,8 @@
 
 	<properties>
 		<openMRSVersion>1.11.5</openMRSVersion>
+		<mohtracPortalVersion>0.2.5</mohtracPortalVersion>
+		<mohorderentrybridgeVersion>1.0-beta</mohorderentrybridgeVersion>
 	</properties>
 
 	<build>

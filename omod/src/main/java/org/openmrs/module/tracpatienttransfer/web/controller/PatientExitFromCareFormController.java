@@ -26,6 +26,7 @@ import org.openmrs.api.EncounterService;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mohorderentrybridge.api.MoHOrderEntryBridgeService;
 import org.openmrs.module.tracpatienttransfer.util.TracPatientTransferConfigurationUtil;
 import org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientConstant;
 import org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientUtil;
@@ -167,26 +168,23 @@ public class PatientExitFromCareFormController extends
 	private boolean stopAllOrders(int patientId, Date discontinuedDate,
 			HttpServletRequest request) {
 		Patient p = Context.getPatientService().getPatient(patientId);
-		List<DrugOrder> drugOrders = Context.getOrderService()
+		List<DrugOrder> drugOrders = Context.getService(MoHOrderEntryBridgeService.class)
 				.getDrugOrdersByPatient(p);
 		Concept discontinuedReason = Context.getConceptService().getConcept(
 				Integer.parseInt(request.getParameter("reasonExitCare")));
 		try {
 			for (DrugOrder drOr : drugOrders) {
 				DrugOrder dr = null;
-				if (!drOr.getDiscontinued()) {
+				if (drOr.isActive()) {
 					dr = drOr;
-					dr.setDiscontinued(true);
-					dr.setDiscontinuedBy(Context.getAuthenticatedUser());
-					dr.setDiscontinuedDate(discontinuedDate);
-					dr.setDiscontinuedReason(discontinuedReason);
+					Context.getOrderService().discontinueOrder(dr, discontinuedReason, discontinuedDate, Context.getService(MoHOrderEntryBridgeService.class).getFirstCurrentProvider(), dr.getEncounter());
 
 					log
 							.info(">>>>>>>>>>>>PatientExitedFromCare>>> Trying to stop DrugOrder#"
 									+ dr.getOrderId()
 									+ " for Patient#"
 									+ dr.getPatient().getPatientId());
-					Context.getOrderService().updateOrder(dr);
+					Context.getOrderService().saveOrder(dr, null);
 					log
 							.info(">>>>>>>>>>>>PatientExitedFromCare>>> Order stopped");
 				}
