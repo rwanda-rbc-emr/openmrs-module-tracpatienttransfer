@@ -18,6 +18,7 @@ import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
 import org.openmrs.Person;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mohorderentrybridge.api.MoHOrderEntryBridgeService;
 import org.openmrs.module.mohtracportal.service.MohTracPortalService;
 import org.openmrs.module.mohtracportal.util.MohTracUtil;
 import org.openmrs.module.tracpatienttransfer.service.PatientTransferService;
@@ -174,7 +175,7 @@ public class EPFC_ResumeCareFormController extends
 				}
 
 				// restart drugs
-				List<DrugOrder> dOrderList = Context.getService(MohTracPortalService.class).getDrugOrdersByPatient(lastObs.getPatient());
+				List<DrugOrder> dOrderList = Context.getService(MoHOrderEntryBridgeService.class).getDrugOrdersByPatient(lastObs.getPatient());
 				for (DrugOrder dOrder : dOrderList) {
 					log.info(">>>>>>>DrugOrder......."
 							+ dOrder.isDiscontinuedRightNow()
