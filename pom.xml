@@ -44,7 +44,7 @@
 	<properties>
 		<openMRSVersion>1.11.5</openMRSVersion>
 		<mohtracPortalVersion>0.2.6</mohtracPortalVersion>
-		<mohorderentrybridgeVersion>1.0-beta</mohorderentrybridgeVersion>
+		<mohorderentrybridgeVersion>1.0.1</mohorderentrybridgeVersion>
 	</properties>
 
 	<build>

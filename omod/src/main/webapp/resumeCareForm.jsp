@@ -1,14 +1,11 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
-<%@ include file="/WEB-INF/template/headerMinimal.jsp"%>
+<%@ include file="/WEB-INF/template/header.jsp"%>
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery-1.3.2.js" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/patienttransfers.css" />
 
 <openmrs:require privilege="Resume care" otherwise="/login.htm" redirect="" />
 
-<script type="text/javascript">
-	var $j = jQuery.noConflict();
-</script>
+<openmrs:portlet url="patientHeader" id="patientDashboardHeader" patientId="${param.patientId}" />
 
 <h2><spring:message code="@MODULE_ID@.resumeCare" /></h2>
 
@@ -100,17 +97,17 @@
 </div>
 
 <script type="text/javascript">
-	$j(document).ready(function(){
+	jQuery(document).ready(function(){
 		
-		$j("#resumeCareReasonId").change( function() {
-			if ($j("#resumeCareReasonId").val()=="<spring:message code='@MODULE_ID@.reason.resumeCare.error'/>") {
-				$j("#voidEncounterDivId").show(200);
-				$j("#patientDefaultedBackDivId").hide(200);
+		jQuery("#resumeCareReasonId").change( function() {
+			if (jQuery("#resumeCareReasonId").val()=="<spring:message code='@MODULE_ID@.reason.resumeCare.error'/>") {
+				jQuery("#voidEncounterDivId").show(200);
+				jQuery("#patientDefaultedBackDivId").hide(200);
 	        }else {
-				$j("#voidEncounterDivId").hide();
-				if ($j("#resumeCareReasonId").val()=="<spring:message code='@MODULE_ID@.reason.resumeCare.defaulted.return'/>") {
-					$j("#patientDefaultedBackDivId").show(200);
-				}else $j("#patientDefaultedBackDivId").hide(200);
+				jQuery("#voidEncounterDivId").hide();
+				if (jQuery("#resumeCareReasonId").val()=="<spring:message code='@MODULE_ID@.reason.resumeCare.defaulted.return'/>") {
+					jQuery("#patientDefaultedBackDivId").show(200);
+				}else jQuery("#patientDefaultedBackDivId").hide(200);
 	        }
 		});		
 		
@@ -136,8 +133,8 @@
 	}
 
 	function backToParent(){
-		if ($j("#prtSave").val()=="true"){
-			$j("#formTransfer").html("<div onclick='fxCancel()' id='savedDiv'> <spring:message code='@MODULE_ID@.general.careresumed'/> </div>");
+		if (jQuery("#prtSave").val()=="true"){
+			jQuery("#formTransfer").html("<div onclick='fxCancel()' id='savedDiv'> <spring:message code='@MODULE_ID@.general.careresumed'/> </div>");
 			setTimeout(fxCancel,2000);
 		}
 	}
@@ -146,47 +143,47 @@
 	function validateFields(){
 		var valid=true;
 
-		if($j("#resumeCareReasonId").val()=="<spring:message code='@MODULE_ID@.reason.resumeCare.defaulted.return'/>"){
-			if($j("#enrollmentDate").val()==''){
-				$j("#enrollmentDateError").html("*");
-				$j("#enrollmentDateError").addClass("error");
+		if(jQuery("#resumeCareReasonId").val()=="<spring:message code='@MODULE_ID@.reason.resumeCare.defaulted.return'/>"){
+			if(jQuery("#enrollmentDate").val()==''){
+				jQuery("#enrollmentDateError").html("*");
+				jQuery("#enrollmentDateError").addClass("error");
 				valid=false;
 			} else {
-				$j("#enrollmentDateError").html("");
-				$j("#enrollmentDateError").removeClass("error");
+				jQuery("#enrollmentDateError").html("");
+				jQuery("#enrollmentDateError").removeClass("error");
 			}
 		}
 		
-		/*if($j("#reasonPatientExitedCareId").val()==$j("#patientDeadConceptId").val()){
-			if($j("#dateOfDeath").val()==''){
-				$j("#dateOfDeathError").html("*");
-				$j("#dateOfDeathError").addClass("error");
+		/*if(jQuery("#reasonPatientExitedCareId").val()==jQuery("#patientDeadConceptId").val()){
+			if(jQuery("#dateOfDeath").val()==''){
+				jQuery("#dateOfDeathError").html("*");
+				jQuery("#dateOfDeathError").addClass("error");
 				valid=false;
 			} else {
-				$j("#dateOfDeathError").html("");
-				$j("#dateOfDeathError").removeClass("error");
+				jQuery("#dateOfDeathError").html("");
+				jQuery("#dateOfDeathError").removeClass("error");
 			}
 
-			if($j("#causeOfDeathId").val()=='0'){
-				$j("#causeOfDeathError").html("*");
-				$j("#causeOfDeathError").addClass("error");
+			if(jQuery("#causeOfDeathId").val()=='0'){
+				jQuery("#causeOfDeathError").html("*");
+				jQuery("#causeOfDeathError").addClass("error");
 				valid=false;
 			} else {
-				$j("#causeOfDeathError").html("");
-				$j("#causeOfDeathError").removeClass("error");
+				jQuery("#causeOfDeathError").html("");
+				jQuery("#causeOfDeathError").removeClass("error");
 			
 		}}*/
 
 		if(!valid){
-			$j("#errorDivNewId").addClass("error");
+			jQuery("#errorDivNewId").addClass("error");
 			/*if(sameLoc){
-				$j("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting."
+				jQuery("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting."
 						+"<br/>[ ** ]  Location_from and Location_to cannot be the same.");
 			}else */
-				$j("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting.");
+				jQuery("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting.");
 		} else {
-			$j("#errorDivNewId").html("");
-			$j("#errorDivNewId").removeClass("error");
+			jQuery("#errorDivNewId").html("");
+			jQuery("#errorDivNewId").removeClass("error");
 		}
 		
 		return valid;

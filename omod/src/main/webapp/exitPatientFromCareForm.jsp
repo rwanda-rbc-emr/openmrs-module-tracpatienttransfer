@@ -1,14 +1,11 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
-<%@ include file="/WEB-INF/template/headerMinimal.jsp"%>
+<%@ include file="/WEB-INF/template/header.jsp"%>
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery-1.3.2.js" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/patienttransfers.css" />
 
 <openmrs:require privilege="Exit a patient from care" otherwise="/login.htm"/>
 
-<script type="text/javascript">
-	var $j = jQuery.noConflict();	
-</script>
+<openmrs:portlet url="patientHeader" id="patientDashboardHeader" patientId="${param.patientId}" />
 
 <h2><spring:message code="@MODULE_ID@.title" /></h2>
 
@@ -145,18 +142,18 @@
 </div>
 
 <script type="text/javascript">
-	$j(document).ready(function(){
+	jQuery(document).ready(function(){
 		
-		$j("#reasonPatientExitedCareId").change( function() {
-			if ($j("#reasonPatientExitedCareId").val()==$j("#patientTransferedOutConceptId").val()) {
-				$j("#patientTransferedOutDiv").show(500);
-				$j("#patientDeadDiv").hide();
-	        }else if ($j("#reasonPatientExitedCareId").val()==$j("#patientDeadConceptId").val()) {
-				$j("#patientDeadDiv").show(500);
-				$j("#patientTransferedOutDiv").hide();
+		jQuery("#reasonPatientExitedCareId").change( function() {
+			if (jQuery("#reasonPatientExitedCareId").val()==jQuery("#patientTransferedOutConceptId").val()) {
+				jQuery("#patientTransferedOutDiv").show(500);
+				jQuery("#patientDeadDiv").hide();
+	        }else if (jQuery("#reasonPatientExitedCareId").val()==jQuery("#patientDeadConceptId").val()) {
+				jQuery("#patientDeadDiv").show(500);
+				jQuery("#patientTransferedOutDiv").hide();
 	        }else {
-				$j("#patientTransferedOutDiv").hide();
-				$j("#patientDeadDiv").hide();		        
+				jQuery("#patientTransferedOutDiv").hide();
+				jQuery("#patientDeadDiv").hide();		        
 		    }
 		});		
 		
@@ -167,17 +164,17 @@
 
 	function showHideLocationFreeText(){
 		if(document.getElementById("chkbx_locationNotFoundId").checked==true){
-			$j("#locationNotFoundSpan").show();
-			$j("#locationDropDownSpan").hide();
+			jQuery("#locationNotFoundSpan").show();
+			jQuery("#locationDropDownSpan").hide();
 		} else {
-			$j("#locationNotFoundSpan").hide();
-			$j("#locationDropDownSpan").show();
+			jQuery("#locationNotFoundSpan").hide();
+			jQuery("#locationDropDownSpan").show();
 		}
 	}
 
 	function backToParent(){
-		if ($j("#prtSave").val()=="true"){
-			$j("#formTransfer").html("<div onclick='fxCancel()' id='savedDiv'> Patient Exited From Care </div>");
+		if (jQuery("#prtSave").val()=="true"){
+			jQuery("#formTransfer").html("<div onclick='fxCancel()' id='savedDiv'> Patient Exited From Care </div>");
 			setTimeout(fxCancel,2000);
 		}
 	}
@@ -194,9 +191,9 @@
 			var msg="You have chosen to end patient care for this patient for the following reason and on the following date, "
 				+"it means also that Drug orders will be stopped and he/she will be taken out of the program"
 				+"\nType of exit: "
-				+$j("#reasonPatientExitedCareId :selected").text()
+				+jQuery("#reasonPatientExitedCareId :selected").text()
 				+"\nDate of exit: "
-				+$j("#encounterDate").val()
+				+jQuery("#encounterDate").val()
 				+"\n\nAre you sure you want to proceed?";
 			
 			if (confirm(msg)) {
@@ -208,119 +205,119 @@
 	
 	function validateFields(){
 		var valid=true;
-		if($j("#encounterDate").val()==''){
-			$j("#encounterDateError").html("*");
-			$j("#encounterDateError").addClass("error");
+		if(jQuery("#encounterDate").val()==''){
+			jQuery("#encounterDateError").html("*");
+			jQuery("#encounterDateError").addClass("error");
 			valid=false;
 		} else {
-			$j("#encounterDateError").html("");
-			$j("#encounterDateError").removeClass("error");
+			jQuery("#encounterDateError").html("");
+			jQuery("#encounterDateError").removeClass("error");
 		}
 
 		if(document.getElementById("provider").value=='0'){
-			$j("#providerError").html("*");
-			$j("#providerError").addClass("error");
+			jQuery("#providerError").html("*");
+			jQuery("#providerError").addClass("error");
 			valid=false;
 		} else {
-			$j("#providerError").html("");
-			$j("#providerError").removeClass("error");
+			jQuery("#providerError").html("");
+			jQuery("#providerError").removeClass("error");
 		}
 
 		if(document.getElementById("location").value==''){
-			$j("#locationError").html("*");
-			$j("#locationError").addClass("error");
+			jQuery("#locationError").html("*");
+			jQuery("#locationError").addClass("error");
 			valid=false;
 		} else {
-			$j("#locationError").html("");
-			$j("#locationError").removeClass("error");
+			jQuery("#locationError").html("");
+			jQuery("#locationError").removeClass("error");
 		}
 
-		if($j("#reasonPatientExitedCareId").val()=='0'){
-			$j("#reasonPatientExitedCareError").html("*");
-			$j("#reasonPatientExitedCareError").addClass("error");
+		if(jQuery("#reasonPatientExitedCareId").val()=='0'){
+			jQuery("#reasonPatientExitedCareError").html("*");
+			jQuery("#reasonPatientExitedCareError").addClass("error");
 			valid=false;
 		} else {
-			$j("#reasonPatientExitedCareError").html("");
-			$j("#reasonPatientExitedCareError").removeClass("error");
+			jQuery("#reasonPatientExitedCareError").html("");
+			jQuery("#reasonPatientExitedCareError").removeClass("error");
 		}
 
-		if($j("#reasonPatientExitedCareId").val()==$j("#patientTransferedOutConceptId").val()){
-			if($j("#transferOutDate").val()==''){
-				$j("#transferOutDateError").html("*");
-				$j("#transferOutDateError").addClass("error");
+		if(jQuery("#reasonPatientExitedCareId").val()==jQuery("#patientTransferedOutConceptId").val()){
+			if(jQuery("#transferOutDate").val()==''){
+				jQuery("#transferOutDateError").html("*");
+				jQuery("#transferOutDateError").addClass("error");
 				valid=false;
 			} else {
-				$j("#transferOutDateError").html("");
-				$j("#transferOutDateError").removeClass("error");
+				jQuery("#transferOutDateError").html("");
+				jQuery("#transferOutDateError").removeClass("error");
 			}
 
 			if(document.getElementById("chkbx_locationNotFoundId")!=null){
 				if(document.getElementById("chkbx_locationNotFoundId").checked==true){
-					if($j("#transferToLocationTextId").val()==''){
-						$j("#transferOutToLocationTextError").html("*");
-						$j("#transferOutToLocationTextError").addClass("error");
+					if(jQuery("#transferToLocationTextId").val()==''){
+						jQuery("#transferOutToLocationTextError").html("*");
+						jQuery("#transferOutToLocationTextError").addClass("error");
 						valid=false;
 					} else {
-						$j("#transferOutToLocationTextError").html("");
-						$j("#transferOutToLocationTextError").removeClass("error");
+						jQuery("#transferOutToLocationTextError").html("");
+						jQuery("#transferOutToLocationTextError").removeClass("error");
 					}
 				}
 			}
 
-			if($j("#locationTo").val()==''){
+			if(jQuery("#locationTo").val()==''){
 				if(document.getElementById("chkbx_locationNotFoundId").checked==false){
-					$j("#transferOutToLocationError").html("*");
-					$j("#transferOutToLocationError").addClass("error");
+					jQuery("#transferOutToLocationError").html("*");
+					jQuery("#transferOutToLocationError").addClass("error");
 					valid=false;
 				} else {
-					$j("#transferOutToLocationError").html("");
-					$j("#transferOutToLocationError").removeClass("error");
+					jQuery("#transferOutToLocationError").html("");
+					jQuery("#transferOutToLocationError").removeClass("error");
 				}
 			}
 
 			var sameLoc=false;
 			
 			if(document.getElementById("location").value!='' && document.getElementById("locationTo").value!='' && document.getElementById("location").value==document.getElementById("locationTo").value){
-				$j("#locationError").html("**");
-				$j("#locationError").addClass("error");
+				jQuery("#locationError").html("**");
+				jQuery("#locationError").addClass("error");
 
-				$j("#transferOutToLocationError").html("**");
-				$j("#transferOutToLocationError").addClass("error");
+				jQuery("#transferOutToLocationError").html("**");
+				jQuery("#transferOutToLocationError").addClass("error");
 				valid=false;
 				sameLoc=true;
 			}
 		}
 
-		if($j("#reasonPatientExitedCareId").val()==$j("#patientDeadConceptId").val()){
-			if($j("#dateOfDeath").val()==''){
-				$j("#dateOfDeathError").html("*");
-				$j("#dateOfDeathError").addClass("error");
+		if(jQuery("#reasonPatientExitedCareId").val()==jQuery("#patientDeadConceptId").val()){
+			if(jQuery("#dateOfDeath").val()==''){
+				jQuery("#dateOfDeathError").html("*");
+				jQuery("#dateOfDeathError").addClass("error");
 				valid=false;
 			} else {
-				$j("#dateOfDeathError").html("");
-				$j("#dateOfDeathError").removeClass("error");
+				jQuery("#dateOfDeathError").html("");
+				jQuery("#dateOfDeathError").removeClass("error");
 			}
 
-			if($j("#causeOfDeathId").val()=='0'){
-				$j("#causeOfDeathError").html("*");
-				$j("#causeOfDeathError").addClass("error");
+			if(jQuery("#causeOfDeathId").val()=='0'){
+				jQuery("#causeOfDeathError").html("*");
+				jQuery("#causeOfDeathError").addClass("error");
 				valid=false;
 			} else {
-				$j("#causeOfDeathError").html("");
-				$j("#causeOfDeathError").removeClass("error");
+				jQuery("#causeOfDeathError").html("");
+				jQuery("#causeOfDeathError").removeClass("error");
 			}
 		}
 
 		if(!valid){
-			$j("#errorDivNewId").addClass("error");
+			jQuery("#errorDivNewId").addClass("error");
 			if(sameLoc){
-				$j("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting."
+				jQuery("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting."
 						+"<br/>[ ** ]  Location_from and Location_to cannot be the same.");
 			}else 
-				$j("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting.");
+				jQuery("#errorDivNewId").html("[ * ]  These fields are required, fill all of them before submitting.");
 		} else {
-			$j("#errorDivNewId").html("");
-			$j("#errorDivNewId").removeClass("error");
+			jQuery("#errorDivNewId").html("");
+			jQuery("#errorDivNewId").removeClass("error");
 		}
 		
 		return valid;
@@ -352,7 +349,7 @@
 		    //yr2  = parseInt(str2.substring(6,10),10);
 		} else{
 			alert("Invalid date : "+dateFormat+": not supported !");
-			$j("#encounterDate").val("");
+			jQuery("#encounterDate").val("");
 			return;
 		}
 		var month1 = mon1 - 1;
@@ -361,14 +358,14 @@
 	    
 	    if(date2 < date1)
 	    {
-	    	$j("#encounterDateError").html("The date can't be in future");
-	    	$j("#encounterDateError").addClass("error");
-	    	$j("#encounterDate").val("");    	 
+	    	jQuery("#encounterDateError").html("The date can't be in future");
+	    	jQuery("#encounterDateError").addClass("error");
+	    	jQuery("#encounterDate").val("");    	 
 	    }
 	    else
 	    {
-	    	$j("#encounterDateError").html("");
-	    	$j("#encounterDateError").removeClass("error");
+	    	jQuery("#encounterDateError").html("");
+	    	jQuery("#encounterDateError").removeClass("error");
 	    }
 	} 
 

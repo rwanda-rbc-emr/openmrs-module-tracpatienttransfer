@@ -53,9 +53,7 @@ public class TracPatientTransferExt extends LinkExt {
 			log.info(">>>>PATIENT>>TRANSFER>>EXTENSION>>> " + e.getMessage());
 			e.printStackTrace();
 		}
-		return "<span id='exitFromCareId'>"
-				+ msg
-				+ "</span><script>function start(){var object=document.getElementById('patientActionsOutcomeLink'); if(object){object.style.display='none';}else {setTimeout(start,500);}}function start2(){var object=document.getElementById('cancelExitButton'); if(object){object.style.display='none';}else {setTimeout(start2,500);}}start();start2();</script>";
+		return msg;
 	}
 
 	/*

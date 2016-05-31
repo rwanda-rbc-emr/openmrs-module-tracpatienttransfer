@@ -13,6 +13,7 @@
 	
 	<require_modules>
 		<require_module version="0.1.1">org.openmrs.module.mohtracportal</require_module>
+		<require_module version="1.0.1">org.openmrs.module.mohorderentrybridge</require_module>
 	</require_modules>
 
 	<activator>@MODULE_PACKAGE@.TracPatientTransferActivator</activator>
