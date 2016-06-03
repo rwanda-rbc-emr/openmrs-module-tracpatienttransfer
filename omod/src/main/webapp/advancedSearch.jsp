@@ -1,7 +1,6 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery-1.3.2.js" />
 <%@ taglib prefix="transfertag" uri="/WEB-INF/view/module/tracpatienttransfer/taglibs/transfertag.tld" %>
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/patienttransfers.css" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/listing.css" />
