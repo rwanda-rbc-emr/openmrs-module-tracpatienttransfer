@@ -4,7 +4,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>tracpatienttransfer</artifactId>
-	<version>0.3.3.33-SNAPSHOT</version>
+	<version>0.3.3.33</version>
 	<packaging>pom</packaging>
 	<name>MOH-TRAC Patient exits from care</name>
 	<description>Parent project for MOH-TRAC Patient exits from care</description>

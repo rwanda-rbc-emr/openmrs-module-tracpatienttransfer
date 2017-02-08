@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.openmrs.module</groupId>
 		<artifactId>tracpatienttransfer</artifactId>
-		<version>0.3.3.33-SNAPSHOT</version>
+		<version>0.3.3.33</version>
 	</parent>
 	<artifactId>tracpatienttransfer-omod</artifactId>
 	<packaging>jar</packaging>
