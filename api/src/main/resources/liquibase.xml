@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="17Aug20171230" author="k-joseph">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0" >
+                    <![CDATA[
+                    SELECT count(distinct p.patient_id) FROM obs o
+                    INNER JOIN patient_program p ON p.patient_id = o.person_id
+                    WHERE o.concept_id = 1811 AND o.voided = 0 AND p.date_completed IS NULL;
+                    ]]>
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <comment>setting hiv completion date for exited patients to exit date</comment>
+        <sql>
+            UPDATE patient_program p INNER JOIN obs o ON p.patient_id = o.person_id
+                SET p.date_completed = IFNULL(o.obs_datetime, o.date_created)
+            WHERE o.concept_id = 1811 AND o.voided = 0 AND p.date_completed IS NULL
+        </sql>
+    </changeSet>
+</databaseChangeLog>

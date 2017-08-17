@@ -40,15 +40,15 @@ public class TracPatientTransferExt extends LinkExt {
 		try {
 			PatientTransferService pts = Context
 					.getService(PatientTransferService.class);
-			if (pts.isThePatientExitedFromCare(Integer.valueOf(patientId))){
+			if (pts.isThePatientExitedFromCare(Integer.valueOf(patientId))) {
 				if (Context.getAuthenticatedUser().hasPrivilege("Resume care"))
 				msg = MohTracUtil.getMessage("tracpatienttransfer.resumeCare",
 						null);
-			}
-			else{
+			} else {
 				if (Context.getAuthenticatedUser().hasPrivilege("Exit a patient from care"))
 				msg = MohTracUtil.getMessage(
-						"tracpatienttransfer.exitPatientFromCare", null);}
+						"tracpatienttransfer.exitPatientFromCare", null);
+			}
 		} catch (Exception e) {
 			log.info(">>>>PATIENT>>TRANSFER>>EXTENSION>>> " + e.getMessage());
 			e.printStackTrace();

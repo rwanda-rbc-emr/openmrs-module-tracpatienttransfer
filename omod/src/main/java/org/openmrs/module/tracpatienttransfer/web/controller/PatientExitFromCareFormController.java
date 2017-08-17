@@ -3,24 +3,9 @@
  */
 package org.openmrs.module.tracpatienttransfer.web.controller;
 
-import java.text.DateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.Concept;
-import org.openmrs.DrugOrder;
-import org.openmrs.Encounter;
-import org.openmrs.Location;
-import org.openmrs.Obs;
-import org.openmrs.Patient;
-import org.openmrs.PatientProgram;
-import org.openmrs.User;
+import org.openmrs.*;
 import org.openmrs.api.ConceptService;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.LocationService;
@@ -34,6 +19,13 @@ import org.openmrs.web.WebConstants;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Administrator
@@ -224,9 +216,9 @@ public class PatientExitFromCareFormController extends
 		try {
 			for (PatientProgram pp : patientPrograms) {
 				PatientProgram programToEnd = null;
-				if (pp.getDateCompleted() == null) {
+				if (TracPatientTransferConfigurationUtil.getHivProgramId() != null && pp.getProgram() != null && pp.getDateCompleted() == null && TracPatientTransferConfigurationUtil.getHivProgramId().equals(pp.getProgram().getProgramId())) {
 					programToEnd = pp;
-					programToEnd.setDateCompleted(dateCompleted);
+					programToEnd.setDateCompleted(dateCompleted == null ? new Date() : dateCompleted);
 					log
 							.info(">>>>>>>>>>>>PatientExitedFromCare>>> Trying to save patientProgram#"
 									+ programToEnd.getProgram().getProgramId()

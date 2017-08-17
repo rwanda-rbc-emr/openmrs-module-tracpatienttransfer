@@ -11,3 +11,8 @@ omod/.project
 omod/.settings/
 omod/target/
 api/target/
+.idea/
+api/tracpatienttransfer-api.iml
+omod/tracpatienttransfer-omod.iml
+tracpatienttransfer.iml
+
